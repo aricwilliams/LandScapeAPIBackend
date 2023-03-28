@@ -132,10 +132,13 @@ namespace LandScapeAPI.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("nextServiceDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("nextServiceDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("service")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("status")

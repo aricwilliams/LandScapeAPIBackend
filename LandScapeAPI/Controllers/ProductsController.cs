@@ -15,14 +15,14 @@ namespace LandScapeAPI.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet]
+        [HttpGet("HomePageController")]
         public async Task<ActionResult<List<HomePageCard>>> GetAllAsync()
         {
             var products = await _productRepository.GetAllAsync();
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("HomePageController/{id}")]
         public async Task<ActionResult<HomePageCard>> GetByIdAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
@@ -34,13 +34,7 @@ namespace LandScapeAPI.Controllers
             return Ok(product);
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<HomePageCard>> CreateAsync(HomePageCard product)
-        //{
-        //    var newProduct = await _productRepository.CreateAsync(product);
-        //    return CreatedAtAction(nameof(GetByIdAsync), new { id = newProduct.id }, newProduct);
-        //}
-        [HttpPost("CreateAsync/{cardTitle}/{dayRange}/{cardTotal}/{cardTotalDetail}/{cardTotalStatus}")]
+        [HttpPost("HomePageControllerCreateAsync/{cardTitle}/{dayRange}/{cardTotal}/{cardTotalDetail}/{cardTotalStatus}")]
         public async Task<ActionResult<HomePageCard>> CreateAsync(string cardTitle, string dayRange, int cardTotal, int cardTotalDetail, string cardTotalStatus)
         {
             HomePageCard newProduct = new HomePageCard
@@ -57,21 +51,27 @@ namespace LandScapeAPI.Controllers
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<HomePageCard>> UpdateAsync(int id, HomePageCard product)
+        [HttpPut("HomePageControllerUpdateHomeCards{id}/{cardTitle}/{dayRange}/{cardTotal}/{cardTotalDetail}/{cardTotalStatus}")]
+        public async Task<ActionResult<HomePageCard>> UpdateAsync2(int id, string cardTitle, string dayRange, int cardTotal, int cardTotalDetail, string cardTotalStatus)
         {
-            if (id != product.id)
+            var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            //var updatedProduct = await _productRepository.UpdateAsync(product);
-            //return Ok(updatedProduct);
+            product.cardTitle = cardTitle;
+            product.dayRange = dayRange;
+            product.cardTotal = cardTotal;
+            product.cardTotalDetail = cardTotalDetail;
+            product.cardTotalStatus = cardTotalStatus;
             await _productRepository.UpdateAsync(product);
+
             return Ok(product);
         }
 
-        [HttpDelete("{id}")]
+
+        [HttpDelete("HomePageController/{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);

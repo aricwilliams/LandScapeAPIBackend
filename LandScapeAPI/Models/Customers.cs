@@ -13,6 +13,8 @@ namespace LandScapeAPI.Models
         public string? phone { get; set; }
         public string? status { get; set; }
         public DateTime? nextServiceDate { get; set; }
+        public string? service { get; set; }
+
 
     }
 }
