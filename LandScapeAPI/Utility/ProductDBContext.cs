@@ -11,7 +11,9 @@ namespace LandScapeAPI.Utility
         public DbSet<Customers> Customers { get; set; }
         public DbSet<HomePageCard> HomePageCard { get; set; }
         public DbSet<Labels> Labels { get; set; }
-
+        public DbSet<InvoiceM> Invoices { get; set; }
+        public DbSet<JobsM> JobsM { get; set; }
+        public DbSet<ChatMessageM> ChatMessages { get; set; }
 
         public ProductDbContext(DbContextOptions<ProductDbContext> options)
        : base(options)

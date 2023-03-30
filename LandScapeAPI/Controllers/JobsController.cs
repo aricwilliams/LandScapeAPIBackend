@@ -1,4 +1,5 @@
-﻿using LandScapeAPI.Repo;
+﻿using LandScapeAPI.Models;
+using LandScapeAPI.Repo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LandScapeAPI.Controllers
@@ -15,14 +16,14 @@ namespace LandScapeAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Jobs>>> GetAllAsync()
+        public async Task<ActionResult<List<JobsM>>> GetAllAsync()
         {
-            var jobs = await _jobs.GetAllAsync();
-            return Ok(jobs);
+            var jobss = await _jobs.GetAllAsync();
+            return Ok(jobss);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Jobs>> GetByIdAsync(int id)
+        public async Task<ActionResult<JobsM>> GetByIdAsync(int id)
         {
             var job = await _jobs.GetByIdAsync(id);
             if (job == null)
@@ -34,14 +35,14 @@ namespace LandScapeAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Jobs>> CreateAsync(Jobs job)
+        public async Task<ActionResult<JobsM>> CreateAsync(JobsM job)
         {
             var createdJob = await _jobs.CreateAsync(job);
             return CreatedAtAction(nameof(GetByIdAsync), new { id = createdJob.Id }, createdJob);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Jobs>> UpdateAsync(int id, Jobs job)
+        public async Task<ActionResult<JobsM>> UpdateAsync(int id, JobsM job)
         {
             if (id != job.Id)
             {

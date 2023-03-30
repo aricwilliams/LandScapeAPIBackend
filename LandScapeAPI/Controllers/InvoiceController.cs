@@ -1,4 +1,5 @@
-﻿using LandScapeAPI.Repo;
+﻿using LandScapeAPI.Models;
+using LandScapeAPI.Repo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LandScapeAPI.Controllers
@@ -9,39 +10,39 @@ namespace LandScapeAPI.Controllers
     {
         private readonly IInvoice _invoice;
 
-        public InvoicesController(IInvoice invoice)
+        public InvoiceController(IInvoice invoice)
         {
             _invoice = invoice;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Invoice>>> GetAllAsync()
+        public async Task<ActionResult<List<InvoiceM>>> GetAllAsync()
         {
             var invoices = await _invoice.GetAllAsync();
             return Ok(invoices);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Invoice>> GetByIdAsync(int id)
+        public async Task<ActionResult<InvoiceM>> GetByIdAsync(int id)
         {
-            var invoice = await _invoice.GetByIdAsync(id);
-            if (invoice == null)
+            var invoicee = await _invoice.GetByIdAsync(id);
+            if (invoicee == null)
             {
                 return NotFound();
             }
 
-            return Ok(invoice);
+            return Ok(invoicee);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Invoice>> CreateAsync(Invoice invoice)
+        public async Task<ActionResult<InvoiceM>> CreateAsync(InvoiceM invoice)
         {
             var createdInvoice = await _invoice.CreateAsync(invoice);
             return CreatedAtAction(nameof(GetByIdAsync), new { id = createdInvoice.Id }, createdInvoice);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Invoice>> UpdateAsync(int id, Invoice invoice)
+        public async Task<ActionResult<InvoiceM>> UpdateAsync(int id, InvoiceM invoice)
         {
             if (id != invoice.Id)
             {
@@ -62,13 +63,13 @@ namespace LandScapeAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var invoice = await _invoice.GetByIdAsync(id);
-            if (invoice == null)
+            var invoicee = await _invoice.GetByIdAsync(id);
+            if (invoicee == null)
             {
                 return NotFound();
             }
 
-            await _invoice.DeleteAsync(invoice);
+            await _invoice.DeleteAsync(invoicee);
             return NoContent();
         }
     }

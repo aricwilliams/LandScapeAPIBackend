@@ -2,7 +2,7 @@
 
 namespace LandScapeAPI.Models
 {
-    public class ChatMessage
+    public class ChatMessageM
     {
         [Key]
         public int Id { get; set; }
@@ -10,6 +10,5 @@ namespace LandScapeAPI.Models
         public string? SenderName { get; set; }
         public string? MessageText { get; set; }
         public DateTime Timestamp { get; set; }
-        public List<string>? ImageUrls { get; set; }
     }
 }

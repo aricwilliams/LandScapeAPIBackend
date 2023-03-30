@@ -1,4 +1,6 @@
-﻿using LandScapeAPI.Utility;
+﻿using LandScapeAPI.Models;
+using LandScapeAPI.Utility;
+using Microsoft.EntityFrameworkCore;
 
 namespace LandScapeAPI.Repo
 {
@@ -6,37 +8,37 @@ namespace LandScapeAPI.Repo
     {
         private readonly ProductDbContext _dbContext;
 
-        public JobsRepository(ProductDbContext dbContext)
+        public Jobs(ProductDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<List<Jobs>> GetAllAsync()
+        public async Task<List<JobsM>> GetAllAsync()
         {
-            return await _dbContext.Jobs.ToListAsync();
+            return await _dbContext.JobsM.ToListAsync();
         }
 
-        public async Task<Jobs> GetByIdAsync(int id)
+        public async Task<JobsM> GetByIdAsync(int id)
         {
-            return await _dbContext.Jobs.FindAsync(id);
+            return await _dbContext.JobsM.FindAsync(id);
         }
 
-        public async Task<Jobs> CreateAsync(Jobs job)
+        public async Task<JobsM> CreateAsync(JobsM job)
         {
-            _dbContext.Jobs.Add(job);
+            _dbContext.JobsM.Add(job);
             await _dbContext.SaveChangesAsync();
             return job;
         }
 
-        public async Task UpdateAsync(Jobs job)
+        public async Task UpdateAsync(JobsM job)
         {
             _dbContext.Entry(job).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Jobs job)
+        public async Task DeleteAsync(JobsM job)
         {
-            _dbContext.Jobs.Remove(job);
+            _dbContext.JobsM.Remove(job);
             await _dbContext.SaveChangesAsync();
         }
     }

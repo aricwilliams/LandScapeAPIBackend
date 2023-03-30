@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace LandScapeAPI.Models
 {
-    public class Jobs
+
+    public class JobsM
     {
         [Key]
         public int Id { get; set; }
@@ -11,7 +14,7 @@ namespace LandScapeAPI.Models
         public decimal EstimatedPrice { get; set; }
         public decimal TruePrice { get; set; }
         public int CustomerId { get; set; }
-        public List<ChatMessage>? ChatMessages { get; set; }
-        public List<string>? ImageUrls { get; set; }
+        public List<ChatMessageM>? ChatMessages { get; set; }
+       
     }
 }

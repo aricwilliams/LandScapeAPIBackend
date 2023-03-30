@@ -1,12 +1,14 @@
-﻿namespace LandScapeAPI.Repo
+﻿using LandScapeAPI.Models;
+
+namespace LandScapeAPI.Repo
 {
     public interface IInvoice
     {
-            Task<List<Invoice>> GetAllAsync();
-            Task<Invoice> GetByIdAsync(int id);
-            Task<Invoice> CreateAsync(Invoice invoice);
-            Task UpdateAsync(Invoice invoice);
-            Task DeleteAsync(Invoice invoice);
+            Task<List<InvoiceM>> GetAllAsync();
+            Task<InvoiceM> GetByIdAsync(int id);
+            Task<InvoiceM> CreateAsync(InvoiceM invoice);
+            Task UpdateAsync(InvoiceM invoice);
+            Task DeleteAsync(InvoiceM invoice);
         
     }
 }

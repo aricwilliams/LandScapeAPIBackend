@@ -1,11 +1,13 @@
-﻿namespace LandScapeAPI.Repo
+﻿using LandScapeAPI.Models;
+
+namespace LandScapeAPI.Repo
 {
     public interface IChatMessage
     {
-        Task<List<ChatMessage>> GetAllAsync();
-        Task<ChatMessage> GetByIdAsync(int id);
-        Task<ChatMessage> CreateAsync(ChatMessage chatMessage);
-        Task UpdateAsync(ChatMessage chatMessage);
-        Task DeleteAsync(ChatMessage chatMessage);
+        Task<List<ChatMessageM>> GetAllAsync();
+        Task<ChatMessageM> GetByIdAsync(int id);
+        Task<ChatMessageM> CreateAsync(ChatMessageM chatMessage);
+        Task UpdateAsync(ChatMessageM chatMessage);
+        Task DeleteAsync(ChatMessageM chatMessage);
     }
 }

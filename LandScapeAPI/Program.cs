@@ -26,6 +26,10 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<ProductDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped < IProductRepository, ProductRepository> ();
+builder.Services.AddScoped<IJobs, Jobs> ();
+builder.Services.AddScoped<IInvoice, Invoice>();
+builder.Services.AddScoped<IChatMessage, ChatMessage>();
+
 builder.Services.Configure<EmailMessage>(builder.Configuration.GetSection(nameof(EmailMessage)));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository> ();

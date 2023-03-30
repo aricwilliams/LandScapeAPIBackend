@@ -1,4 +1,6 @@
-﻿using LandScapeAPI.Utility;
+﻿using LandScapeAPI.Models;
+using LandScapeAPI.Utility;
+using Microsoft.EntityFrameworkCore;
 
 namespace LandScapeAPI.Repo
 {
@@ -6,34 +8,34 @@ namespace LandScapeAPI.Repo
     {
         private readonly ProductDbContext _dbContext;
 
-        public ChatMessageRepository(ProductDbContext dbContext)
+        public ChatMessage(ProductDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<List<ChatMessage>> GetAllAsync()
+        public async Task<List<ChatMessageM>> GetAllAsync()
         {
             return await _dbContext.ChatMessages.ToListAsync();
         }
-        public async Task<ChatMessage> GetByIdAsync(int id)
+        public async Task<ChatMessageM> GetByIdAsync(int id)
         {
             return await _dbContext.ChatMessages.FindAsync(id);
         }
 
-        public async Task<ChatMessage> CreateAsync(ChatMessage chatMessage)
+        public async Task<ChatMessageM> CreateAsync(ChatMessageM chatMessage)
         {
             _dbContext.ChatMessages.Add(chatMessage);
             await _dbContext.SaveChangesAsync();
             return chatMessage;
         }
 
-        public async Task UpdateAsync(ChatMessage chatMessage)
+        public async Task UpdateAsync(ChatMessageM chatMessage)
         {
             _dbContext.Entry(chatMessage).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(ChatMessage chatMessage)
+        public async Task DeleteAsync(ChatMessageM chatMessage)
         {
             _dbContext.ChatMessages.Remove(chatMessage);
             await _dbContext.SaveChangesAsync();

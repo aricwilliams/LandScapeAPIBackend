@@ -1,4 +1,5 @@
-﻿using LandScapeAPI.Repo;
+﻿using LandScapeAPI.Models;
+using LandScapeAPI.Repo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LandScapeAPI.Controllers
@@ -22,26 +23,26 @@ namespace LandScapeAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ChatMessage>> GetByIdAsync(int id)
+        public async Task<ActionResult<ChatMessageM>> GetByIdAsync(int id)
         {
-            var chatMessage = await _chatMessage.GetByIdAsync(id);
-            if (chatMessage == null)
+            var chatMessagee = await _chatMessage.GetByIdAsync(id);
+            if (chatMessagee == null)
             {
                 return NotFound();
             }
 
-            return Ok(chatMessage);
+            return Ok(chatMessagee);
         }
 
         [HttpPost]
-        public async Task<ActionResult<ChatMessage>> CreateAsync(ChatMessage chatMessage)
+        public async Task<ActionResult<ChatMessageM>> CreateAsync(ChatMessageM chatMessage)
         {
             var createdChatMessage = await _chatMessage.CreateAsync(chatMessage);
             return CreatedAtAction(nameof(GetByIdAsync), new { id = createdChatMessage.Id }, createdChatMessage);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ChatMessage>> UpdateAsync(int id, ChatMessage chatMessage)
+        public async Task<ActionResult<ChatMessageM>> UpdateAsync(int id, ChatMessageM chatMessage)
         {
             if (id != chatMessage.Id)
             {
@@ -62,13 +63,13 @@ namespace LandScapeAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var chatMessage = await _chatMessage.GetByIdAsync(id);
-            if (chatMessage == null)
+            var chatMessagee = await _chatMessage.GetByIdAsync(id);
+            if (chatMessagee == null)
             {
                 return NotFound();
             }
 
-            await _chatMessage.DeleteAsync(chatMessage);
+            await _chatMessage.DeleteAsync(chatMessagee);
 
             return NoContent();
         }

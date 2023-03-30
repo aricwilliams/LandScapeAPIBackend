@@ -1,6 +1,6 @@
 ﻿namespace LandScapeAPI.Models
 {
-    public class Invoice
+    public class InvoiceM
     {
         public int Id { get; set; }
         public int LandscapingJobId { get; set; }
